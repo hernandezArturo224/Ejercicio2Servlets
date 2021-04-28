@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,12 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+
+import daos.UsuariosDAO;
+import modelos.Usuarios;
+import utilidades.HibernateUtil;
+import utilidades.UsoLogger;
+import org.apache.log4j.Logger;
+
 /**
  * Servlet implementation class Login
  */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Session s;
+	
+	Logger log;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,6 +41,9 @@ public class Login extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
+		s=HibernateUtil.getSessionFactory().openSession();
+		log = UsoLogger.getLogger(Login.class);
+		log.info("Sesion iniciada");
 	}
 
 	/**
@@ -35,7 +51,27 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String email;
+		String clave;
+		email = request.getParameter("email");
+		clave = request.getParameter("clave");
+		
+		log.info("Parametros obtenidos "+email+" "+clave);
+		
+		PrintWriter writer = response.getWriter();
+		//response.getWriter().append("Served at: ").append(request.getContextPath()).append(email).append(clave);
+		
+		Usuarios us = UsuariosDAO.getLoginUser(s, email, clave);
+		log.info("Posible usuario adquirido");
+		
+		if(us != null) {
+			writer.println("Bienvenido "+us.getNombre()+" por GET");
+		}else {
+			writer.println("Error de autentificacion");
+		}
+		
+		
 	}
 
 	/**
@@ -43,7 +79,26 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
+		
+		String email;
+		String clave;
+		email = request.getParameter("email");
+		clave = request.getParameter("clave");
+		
+		log.info("Parametros obtenidos "+email+" "+clave);
+		
+		PrintWriter writer = response.getWriter();
+		//response.getWriter().append("Served at: ").append(request.getContextPath()).append(email).append(clave);
+		
+		Usuarios us = UsuariosDAO.getLoginUser(s, email, clave);
+		log.info("Posible usuario adquirido");
+		
+		if(us != null) {
+			writer.println("Bienvenido "+us.getNombre() +" por POST");
+		}else {
+			writer.println("Error de autentificacion");
+		}
 	}
 
 }
