@@ -11,8 +11,12 @@ public class pruebaDaos {
 		// TODO Auto-generated method stub
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		
-		Usuarios us= UsuariosDAO.getLoginUser(s, "admin@tiendaonline.es", "1234");
-		System.out.println(us.toString());
+		/*Usuarios us= UsuariosDAO.getLoginUser(s, "admin@tiendaonline.es", "1234");
+		System.out.println(us.toString());*/
+		
+		
+		
+		UsuariosDAO.insertUser(s,4,3,"arturohernande1@usal.es","1234","arturituri",null,null,null,null,null,null,null );
 	}
 
 }
