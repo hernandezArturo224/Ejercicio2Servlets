@@ -16,7 +16,9 @@ public class pruebaDaos {
 		
 		
 		
-		UsuariosDAO.insertUser(s,4,3,"arturohernande1@usal.es","1234","arturituri",null,null,null,null,null,null,null );
+		//UsuariosDAO.insertUser(s,4,3,"arturohernande1@usal.es","1234","arturituri",null,null,null,null,null,null,null );
+		
+		//System.out.println(UsuariosDAO.compruebaIdExistente(s, 5));
 	}
 
 }

@@ -76,24 +76,37 @@ public class Registro extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int id = Integer.parseInt(request.getParameter("id"));
-		int id_rol = Integer.parseInt(request.getParameter("id_rol"));
-		String email = request.getParameter("email");
-		String clave = request.getParameter("clave");
-		String nombre = request.getParameter("nombre");
-		String ap1 = request.getParameter("ap1");
-		String ap2 = request.getParameter("ap2");
-		String direccion = request.getParameter("direccion");
-		String localidad = request.getParameter("localidad");
-		String provincia = request.getParameter("provincia");
-		String telefono = request.getParameter("telefono");
-		String dni = request.getParameter("dni");
 		
-		log.info("Parametros recogidos");
-		UsuariosDAO.insertUser(s,id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni );
-		log.info("Usuario registrado");
+		String idstr = request.getParameter("id");
+		String idrstr = request.getParameter("id_rol");
+		if(idstr.equals("") || idrstr.equals("")) {
+			response.getWriter().append("Tienes que introducir al menos la id y el rol");
+		}else{
+			int id = Integer.parseInt(idstr);
+			if(UsuariosDAO.compruebaIdExistente(s, id)) {
+				response.getWriter().append("Ya hay un usuario con la id existente");
+			}else {
+				int id_rol = Integer.parseInt(idrstr);
+				String email = request.getParameter("email");
+				String clave = request.getParameter("clave");
+				String nombre = request.getParameter("nombre");
+				String ap1 = request.getParameter("ap1");
+				String ap2 = request.getParameter("ap2");
+				String direccion = request.getParameter("direccion");
+				String localidad = request.getParameter("localidad");
+				String provincia = request.getParameter("provincia");
+				String telefono = request.getParameter("telefono");
+				String dni = request.getParameter("dni");
+				
+				log.info("Parametros recogidos");
+				UsuariosDAO.insertUser(s,id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni );
+				log.info("Usuario registrado");
+				
+				response.getWriter().append("Inserción realizada..");	
+			}//else2
+		}//else1
 		
-		response.getWriter().append("Inserción realizada..");	
+		
 	}
 
 }
