@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import daos.UsuariosDAO;
 import utilidades.HibernateUtil;
+import utilidades.UsoLogger;
 
 /**
  * Servlet implementation class Registro
@@ -21,7 +23,8 @@ import utilidades.HibernateUtil;
 @WebServlet("/Registro")
 public class Registro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Session s;
+	private static Session s;
+	private static Logger log;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,6 +40,8 @@ public class Registro extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		s=HibernateUtil.getSessionFactory().openSession();
+		log = UsoLogger.getLogger(Registro.class);
+		log.info("Logger y sesion iniciados");
 	}
 
 	/**
@@ -58,16 +63,11 @@ public class Registro extends HttpServlet {
 		String telefono = request.getParameter("telefono");
 		String dni = request.getParameter("dni");
 		
+		log.info("Parametros recogidos");
+		UsuariosDAO.insertUser(s,id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni );
+		log.info("Usuario registrado");
 		
-		PrintWriter wr = response.getWriter();
-		wr.println(id);
-		wr.println(id_rol);
-		wr.println(email);
-		wr.println(clave);
-		
-		
-		
-		//UsuariosDAO.insertUser(s,id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni );
+		response.getWriter().append("Inserción realizada..");	
 		
 	}
 
@@ -76,7 +76,24 @@ public class Registro extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		int id = Integer.parseInt(request.getParameter("id"));
+		int id_rol = Integer.parseInt(request.getParameter("id_rol"));
+		String email = request.getParameter("email");
+		String clave = request.getParameter("clave");
+		String nombre = request.getParameter("nombre");
+		String ap1 = request.getParameter("ap1");
+		String ap2 = request.getParameter("ap2");
+		String direccion = request.getParameter("direccion");
+		String localidad = request.getParameter("localidad");
+		String provincia = request.getParameter("provincia");
+		String telefono = request.getParameter("telefono");
+		String dni = request.getParameter("dni");
+		
+		log.info("Parametros recogidos");
+		UsuariosDAO.insertUser(s,id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni );
+		log.info("Usuario registrado");
+		
+		response.getWriter().append("Inserción realizada..");	
 	}
 
 }
