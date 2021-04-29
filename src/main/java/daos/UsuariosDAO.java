@@ -25,8 +25,39 @@ public class UsuariosDAO {
  			}
  		}else {
  			return null;
- 		}
- 			
+ 		}	
+	}
+	
+	public static boolean compruebaIdExistente(Session s,int id) {
+		 String hQuery = " from Usuarios u " +
+                 " where u.id = :id";
+		 
+		 Usuarios us = s.createQuery(hQuery,Usuarios.class)
+				 		.setParameter("id", id)
+				 		.setMaxResults(1)
+		 				.uniqueResult();
+		 
+		 if(us != null) {
+			 return true;
+		 }else {
+			 return false;
+		 }
+	}
+	
+	public static boolean compruebaEmailExistente(Session s,String email) {
+		 String hQuery = " from Usuarios u " +
+                " where u.email = :email";
+		 
+		 Usuarios us = s.createQuery(hQuery,Usuarios.class)
+				 		.setParameter("email", email)
+				 		.setMaxResults(1)
+		 				.uniqueResult();
+		 
+		 if(us != null) {
+			 return true;
+		 }else {
+			 return false;
+		 }
 	}
 	
 	
