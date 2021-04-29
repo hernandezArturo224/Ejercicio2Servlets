@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 
@@ -68,7 +69,8 @@ public class Login extends HttpServlet {
 		if(us != null) {
 			writer.println("Bienvenido "+us.getNombre()+" por GET");
 		}else {
-			writer.println("Error de autentificacion");
+			
+			request.getRequestDispatcher("login.html").forward(request, response);
 		}
 		
 		
@@ -95,9 +97,13 @@ public class Login extends HttpServlet {
 		log.info("Posible usuario adquirido");
 		
 		if(us != null) {
-			writer.println("Bienvenido "+us.getNombre() +" por POST");
+			//writer.println("Bienvenido "+us.getNombre() +" por POST");
+			String name = us.getNombre();
+			HttpSession sesion = request.getSession(true);
+			sesion.setAttribute("nombre", name);
+			request.getRequestDispatcher("menu.jsp").forward(request, response);
 		}else {
-			writer.println("Error de autentificacion");
+			request.getRequestDispatcher("login.html").forward(request, response);
 		}
 	}
 
