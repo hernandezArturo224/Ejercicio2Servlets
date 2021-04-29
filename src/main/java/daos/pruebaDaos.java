@@ -3,7 +3,8 @@ package daos;
 import org.hibernate.Session;
 
 import utilidades.HibernateUtil;
-import modelos.Usuarios;
+import modelos.*;
+import java.util.*;
 
 public class pruebaDaos {
 
@@ -16,7 +17,13 @@ public class pruebaDaos {
 		
 		
 		
-		UsuariosDAO.insertUser(s,4,3,"arturohernande1@usal.es","1234","arturituri",null,null,null,null,null,null,null );
+		//UsuariosDAO.insertUser(s,4,3,"arturohernande1@usal.es","1234","arturituri",null,null,null,null,null,null,null );
+		
+		//List<Roles> roles= RolesDAO.getAllRoles(s);
+		
+		//System.out.println(roles.get(1).toString());
+		
+		//RolesDAO.insertRol(s, 4, "Observador");
 	}
 
 }
