@@ -88,21 +88,29 @@ public class Registro extends HttpServlet {
 			}else {
 				int id_rol = Integer.parseInt(idrstr);
 				String email = request.getParameter("email");
-				String clave = request.getParameter("clave");
-				String nombre = request.getParameter("nombre");
-				String ap1 = request.getParameter("ap1");
-				String ap2 = request.getParameter("ap2");
-				String direccion = request.getParameter("direccion");
-				String localidad = request.getParameter("localidad");
-				String provincia = request.getParameter("provincia");
-				String telefono = request.getParameter("telefono");
-				String dni = request.getParameter("dni");
-				
-				log.info("Parametros recogidos");
-				UsuariosDAO.insertUser(s,id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni );
-				log.info("Usuario registrado");
-				
-				response.getWriter().append("Inserción realizada..");	
+				if(email.equals("")) {
+					response.getWriter().append("Introduce un email");
+				}else {
+					if(UsuariosDAO.compruebaEmailExistente(s, email)) {
+						response.getWriter().append("El email introducido ya existe...");
+					}else {
+						String clave = request.getParameter("clave");
+						String nombre = request.getParameter("nombre");
+						String ap1 = request.getParameter("ap1");
+						String ap2 = request.getParameter("ap2");
+						String direccion = request.getParameter("direccion");
+						String localidad = request.getParameter("localidad");
+						String provincia = request.getParameter("provincia");
+						String telefono = request.getParameter("telefono");
+						String dni = request.getParameter("dni");
+						
+						log.info("Parametros recogidos");
+						UsuariosDAO.insertUser(s,id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni );
+						log.info("Usuario registrado");
+						
+						response.getWriter().append("Inserción realizada..");
+					}//else email repetido
+				}//else email vacio
 			}//else2
 		}//else1
 		

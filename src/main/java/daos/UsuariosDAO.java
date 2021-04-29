@@ -44,6 +44,22 @@ public class UsuariosDAO {
 		 }
 	}
 	
+	public static boolean compruebaEmailExistente(Session s,String email) {
+		 String hQuery = " from Usuarios u " +
+                " where u.email = :email";
+		 
+		 Usuarios us = s.createQuery(hQuery,Usuarios.class)
+				 		.setParameter("email", email)
+				 		.setMaxResults(1)
+		 				.uniqueResult();
+		 
+		 if(us != null) {
+			 return true;
+		 }else {
+			 return false;
+		 }
+	}
+	
 	
 	public static void insertUser(Session s, int id,int id_rol,String email,String clave,String nombre,String ap1, String ap2,String direccion,String localidad,String provincia,String telefono,String dni ) {
 		Transaction tx = s.beginTransaction();
