@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import modelos.Categorias;
-import modelos.Roles;
 
 public class CategoriasDAO {
 	

@@ -4,6 +4,8 @@ import org.hibernate.Session;
 
 import utilidades.HibernateUtil;
 import modelos.*;
+
+import java.sql.Timestamp;
 import java.util.*;
 
 public class pruebaDaos {
@@ -27,6 +29,16 @@ public class pruebaDaos {
 		
 		//System.out.println(CategoriasDAO.getAllCategorias(s).get(1).toString());
 		//CategoriasDAO.insertCategoria(s, "Mandiles", "Mandiles wapisimos");
+		
+		//System.out.println(ProductosDAO.getAllProductos(s).get(0).toString());
+		GregorianCalendar cal = new GregorianCalendar(2024,10,20);
+		Date date = new Date(cal.getTimeInMillis());
+		
+		
+		Timestamp fechaBaja = new Timestamp(date.getTime());
+		System.out.println(fechaBaja);
+		
+		ProductosDAO.insertProducto(s, 1, "Casio", "Casio", 15.0, 15, null, 15f);
 	}
 
 }
