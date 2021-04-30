@@ -62,6 +62,7 @@ public class InsertaRol extends HttpServlet {
 				String rol = request.getParameter("rol");
 				RolesDAO.insertRol(s, id, rol);
 				response.getWriter().append("Rol insertado");
+				request.getRequestDispatcher("menu.jsp").forward(request, response);
 			}
 		}
 		
@@ -77,14 +78,17 @@ String idstr = request.getParameter("id");
 		if(idstr.equals("")) {
 			response.getWriter().append("Introduce una Id minimo");
 			log.debug("Id no introducida");
+			request.getRequestDispatcher("insercionRol.html").forward(request, response);
 		}else {
 			int id = Integer.parseInt(idstr);
 			if(RolesDAO.getIdExistente(s, id)) {
 				response.getWriter().append("El id ya existe en la BBDD");
+				request.getRequestDispatcher("insercionRol.html").forward(request, response);
 			}else {
 				String rol = request.getParameter("rol");
 				RolesDAO.insertRol(s, id, rol);
 				response.getWriter().append("Rol insertado");
+				request.getRequestDispatcher("menu.jsp").forward(request, response);
 			}
 		}
 	}

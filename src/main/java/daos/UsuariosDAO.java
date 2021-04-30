@@ -28,6 +28,13 @@ public class UsuariosDAO {
  		}	
 	}
 	
+	public static List<Usuarios> getAllUsers(Session s){
+		String hQuery = "from Usuarios";
+		List<Usuarios> users = s.createQuery(hQuery,Usuarios.class).list();
+		
+		return users;
+	}
+	
 	public static boolean compruebaIdExistente(Session s,int id) {
 		 String hQuery = " from Usuarios u " +
                  " where u.id = :id";

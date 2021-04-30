@@ -2,7 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,23 +18,19 @@ import org.hibernate.Session;
 import daos.UsuariosDAO;
 import modelos.Usuarios;
 import utilidades.HibernateUtil;
-import utilidades.UsoLogger;
-import org.apache.log4j.Logger;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class MuestraUsers
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/MuestraUsers")
+public class MuestraUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Session s;
-	
-	Logger log;
+	private static Session s;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public MuestraUsers() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,9 +40,7 @@ public class Login extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		s=HibernateUtil.getSessionFactory().openSession();
-		log = UsoLogger.getLogger(Login.class);
-		log.info("Sesion iniciada");
+		s = HibernateUtil.getSessionFactory().openSession();
 	}
 
 	/**
@@ -53,10 +48,19 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append("Mostrando usuarios");
+		List<Usuarios> us = UsuariosDAO.getAllUsers(s);
 		
-		doPost(request,response);
+		/*PrintWriter writer = response.getWriter();
 		
+		Iterator<Usuarios> it = us.iterator();
 		
+		while(it.hasNext()) {
+			writer.println(it.next().toString());
+		}*/
+		
+		request.setAttribute("listaUsers", us);
+		request.getRequestDispatcher("mostrarUsers.jsp").forward(request, response);
 	}
 
 	/**
@@ -64,32 +68,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-		
-		String email;
-		String clave;
-		email = request.getParameter("email");
-		clave = request.getParameter("clave");
-		
-		log.info("Parametros obtenidos "+email+" "+clave);
-		
-		PrintWriter writer = response.getWriter();
-		//response.getWriter().append("Served at: ").append(request.getContextPath()).append(email).append(clave);
-		
-		Usuarios us = UsuariosDAO.getLoginUser(s, email, clave);
-		log.info("Posible usuario adquirido");
-		
-		if(us != null) {
-			//writer.println("Bienvenido "+us.getNombre() +" por POST");
-			HttpSession sesion = request.getSession(true);
-			sesion.setAttribute("user", us);
-			Date fecha;
-			fecha = new Date();
-			sesion.setAttribute("date", fecha);
-			request.getRequestDispatcher("menu.jsp").forward(request, response);
-		}else {
-			request.getRequestDispatcher("login.html").forward(request, response);
-		}
+		doGet(request, response);
 	}
 
 }
