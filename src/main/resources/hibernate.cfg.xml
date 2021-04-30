@@ -11,5 +11,6 @@
         
          <mapping class="modelos.Usuarios"/>
          <mapping class="modelos.Roles"/>
+         <mapping class="modelos.Categorias"/>
     </session-factory>
 </hibernate-configuration>

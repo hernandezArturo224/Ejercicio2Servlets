@@ -24,6 +24,9 @@ public class pruebaDaos {
 		//System.out.println(roles.get(1).toString());
 		
 		//RolesDAO.insertRol(s, 4, "Observador");
+		
+		//System.out.println(CategoriasDAO.getAllCategorias(s).get(1).toString());
+		//CategoriasDAO.insertCategoria(s, "Mandiles", "Mandiles wapisimos");
 	}
 
 }
