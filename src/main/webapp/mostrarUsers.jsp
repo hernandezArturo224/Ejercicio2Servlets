@@ -5,8 +5,6 @@
     
 <%
 List<Usuarios> users = (List<Usuarios>) request.getAttribute("listaUsers");
-Usuarios us = (Usuarios)session.getAttribute("user");
-Date fecha = (Date)session.getAttribute("date");
 %>    
 <!DOCTYPE html>
 <html>
@@ -16,14 +14,8 @@ Date fecha = (Date)session.getAttribute("date");
 <title>Insert title here</title>
 </head>
 <body>
-<div class="div30">
-	<h2><% out.print(us.getNombre()+" "+us.getApellido1()+" "+us.getApellido2()); %></h2>
-</div>
-<div class="div40">
-	<h2>Usuarios en la BBDD</h2>
-</div>
-<div class="div30">
-	<h2><% out.print(fecha); %></h2>
+<div class="div100">
+	<%@ include file="cabecera.jsp" %>
 </div>
 
 	<div class="div100">
