@@ -22,6 +22,24 @@ h1{
 	/*background-color: gray;*/
 }
 
+.div100{
+	width: 100%;
+	float:left;
+	text-align: center;
+	/*background-color: gray;*/
+}
+
+.tabla{
+	border: 1px black solid;
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+.bordes{
+	border: 1px black solid;
+	border-collapse: collapse;
+}
+
 .boton_personalizado{
     text-decoration: none;
     padding: 10px;

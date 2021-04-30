@@ -81,22 +81,22 @@ public class Registro extends HttpServlet {
 		String idrstr = request.getParameter("id_rol");
 		if(idstr.equals("") || idrstr.equals("")) {
 			response.getWriter().append("Tienes que introducir al menos la id y el rol");
-			request.getRequestDispatcher("registro.html").forward(request, response);
+			request.getRequestDispatcher("registro.jsp").forward(request, response);
 		}else{
 			int id = Integer.parseInt(idstr);
 			if(UsuariosDAO.compruebaIdExistente(s, id)) {
 				response.getWriter().append("Ya hay un usuario con la id existente");
-				request.getRequestDispatcher("registro.html").forward(request, response);
+				request.getRequestDispatcher("registro.jsp").forward(request, response);
 			}else {
 				int id_rol = Integer.parseInt(idrstr);
 				String email = request.getParameter("email");
 				if(email.equals("")) {
 					response.getWriter().append("Introduce un email");
-					request.getRequestDispatcher("registro.html").forward(request, response);
+					request.getRequestDispatcher("registro.jsp").forward(request, response);
 				}else {
 					if(UsuariosDAO.compruebaEmailExistente(s, email)) {
 						response.getWriter().append("El email introducido ya existe...");
-						request.getRequestDispatcher("registro.html").forward(request, response);
+						request.getRequestDispatcher("registro.jsp").forward(request, response);
 					}else {
 						String clave = request.getParameter("clave");
 						String nombre = request.getParameter("nombre");

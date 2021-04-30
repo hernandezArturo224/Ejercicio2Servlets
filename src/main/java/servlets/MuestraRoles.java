@@ -51,13 +51,8 @@ public class MuestraRoles extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		List<Roles> roles = RolesDAO.getAllRoles(s);
 		
-		PrintWriter writer = response.getWriter();
-		
-		Iterator<Roles> it = roles.iterator();
-		
-		while(it.hasNext()) {
-			writer.println(it.next().toString());
-		}
+		request.setAttribute("listaRoles", roles);
+		request.getRequestDispatcher("mostrarRoles.jsp").forward(request, response);
 		
 	}
 
