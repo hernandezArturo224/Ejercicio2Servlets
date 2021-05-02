@@ -24,9 +24,13 @@ String volver = (String)request.getParameter("volver");
 	</form>
 </div>
 <div class="div20">
-	<form action=<%= volver %> method="post">
-		<input type="submit" class="boton_personalizado" value="Volver" />
-	</form>
+	<%if(volver != null){ %>
+		<form action=<%= volver %> method="post">
+			<input type="submit" class="boton_personalizado" value="Volver" />
+		</form>
+	<% 
+	}//fin if volver  
+	%>
 </div>
 <div class="div30">
 	<h2><% out.print(fecha); %></h2>
