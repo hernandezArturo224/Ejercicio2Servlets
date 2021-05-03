@@ -23,7 +23,6 @@ import utilidades.UsoLogger;
 @WebServlet("/Registro")
 public class Registro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Session s;
 	private static Logger log;
        
     /**
@@ -39,9 +38,8 @@ public class Registro extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		s=HibernateUtil.getSessionFactory().openSession();
 		log = UsoLogger.getLogger(Registro.class);
-		log.info("Logger y sesion iniciados");
+		log.info("Logger iniciados");
 	}
 
 	/**
@@ -50,24 +48,7 @@ public class Registro extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		int id = Integer.parseInt(request.getParameter("id"));
-		int id_rol = Integer.parseInt(request.getParameter("id_rol"));
-		String email = request.getParameter("email");
-		String clave = request.getParameter("clave");
-		String nombre = request.getParameter("nombre");
-		String ap1 = request.getParameter("ap1");
-		String ap2 = request.getParameter("ap2");
-		String direccion = request.getParameter("direccion");
-		String localidad = request.getParameter("localidad");
-		String provincia = request.getParameter("provincia");
-		String telefono = request.getParameter("telefono");
-		String dni = request.getParameter("dni");
-		
-		log.info("Parametros recogidos");
-		UsuariosDAO.insertUser(s,id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni );
-		log.info("Usuario registrado");
-		
-		response.getWriter().append("Inserción realizada..");	
+		doPost(request,response);
 		
 	}
 
@@ -84,7 +65,7 @@ public class Registro extends HttpServlet {
 			request.getRequestDispatcher("registro.jsp").forward(request, response);
 		}else{
 			int id = Integer.parseInt(idstr);
-			if(UsuariosDAO.compruebaIdExistente(s, id)) {
+			if(UsuariosDAO.compruebaIdExistente(id)) {
 				response.getWriter().append("Ya hay un usuario con la id existente");
 				request.getRequestDispatcher("registro.jsp").forward(request, response);
 			}else {
@@ -94,7 +75,7 @@ public class Registro extends HttpServlet {
 					response.getWriter().append("Introduce un email");
 					request.getRequestDispatcher("registro.jsp").forward(request, response);
 				}else {
-					if(UsuariosDAO.compruebaEmailExistente(s, email)) {
+					if(UsuariosDAO.compruebaEmailExistente(email)) {
 						response.getWriter().append("El email introducido ya existe...");
 						request.getRequestDispatcher("registro.jsp").forward(request, response);
 					}else {
@@ -109,7 +90,7 @@ public class Registro extends HttpServlet {
 						String dni = request.getParameter("dni");
 						
 						log.info("Parametros recogidos");
-						UsuariosDAO.insertUser(s,id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni );
+						UsuariosDAO.insertUser(id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni );
 						log.info("Usuario registrado");
 						
 						response.getWriter().append("Inserción realizada..");

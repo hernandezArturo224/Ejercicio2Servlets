@@ -25,7 +25,7 @@ import utilidades.HibernateUtil;
 @WebServlet("/MuestraRoles")
 public class MuestraRoles extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Session s;
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,7 +40,7 @@ public class MuestraRoles extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		s = HibernateUtil.getSessionFactory().openSession();
+
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class MuestraRoles extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		List<Roles> roles = RolesDAO.getAllRoles(s);
+		List<Roles> roles = RolesDAO.getAllRoles();
 		
 		request.setAttribute("listaRoles", roles);
 		request.getRequestDispatcher("mostrarRoles.jsp").forward(request, response);

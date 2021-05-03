@@ -36,7 +36,7 @@ public class CerrarSesion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getSession().invalidate();
-		request.getRequestDispatcher("login.html").forward(request, response);
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	/**

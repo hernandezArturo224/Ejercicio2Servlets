@@ -21,7 +21,6 @@ import utilidades.UsoLogger;
 @WebServlet("/InsertaRol")
 public class InsertaRol extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Session s;
 	private static Logger log;
        
     /**
@@ -37,7 +36,6 @@ public class InsertaRol extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		s = HibernateUtil.getSessionFactory().openSession();
 		log = UsoLogger.getLogger(InsertaRol.class);
 		log.info("Sesion y logger creados");
 	}
@@ -49,22 +47,7 @@ public class InsertaRol extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		String idstr = request.getParameter("id");
-		
-		if(idstr.equals("")) {
-			response.getWriter().append("Introduce una Id minimo");
-			log.debug("Id no introducida");
-		}else {
-			int id = Integer.parseInt(idstr);
-			if(RolesDAO.getIdExistente(s, id)) {
-				response.getWriter().append("El id ya existe en la BBDD");
-			}else {
-				String rol = request.getParameter("rol");
-				RolesDAO.insertRol(s, id, rol);
-				response.getWriter().append("Rol insertado");
-				request.getRequestDispatcher("menu.jsp").forward(request, response);
-			}
-		}
+	doPost(request,response);
 		
 	}
 
@@ -81,12 +64,12 @@ String idstr = request.getParameter("id");
 			request.getRequestDispatcher("insercionRol.jsp").forward(request, response);
 		}else {
 			int id = Integer.parseInt(idstr);
-			if(RolesDAO.getIdExistente(s, id)) {
+			if(RolesDAO.getIdExistente(id)) {
 				response.getWriter().append("El id ya existe en la BBDD");
 				request.getRequestDispatcher("insercionRol.jsp").forward(request, response);
 			}else {
 				String rol = request.getParameter("rol");
-				RolesDAO.insertRol(s, id, rol);
+				RolesDAO.insertRol(id, rol);
 				response.getWriter().append("Rol insertado");
 				request.getRequestDispatcher("menu.jsp").forward(request, response);
 			}

@@ -26,7 +26,6 @@ import org.apache.log4j.Logger;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Session s;
 	
 	Logger log;
        
@@ -43,7 +42,6 @@ public class Login extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		s=HibernateUtil.getSessionFactory().openSession();
 		log = UsoLogger.getLogger(Login.class);
 		log.info("Sesion iniciada");
 	}
@@ -73,10 +71,10 @@ public class Login extends HttpServlet {
 		
 		log.info("Parametros obtenidos "+email+" "+clave);
 		
-		PrintWriter writer = response.getWriter();
+		//PrintWriter writer = response.getWriter();
 		//response.getWriter().append("Served at: ").append(request.getContextPath()).append(email).append(clave);
 		
-		Usuarios us = UsuariosDAO.getLoginUser(s, email, clave);
+		Usuarios us = UsuariosDAO.getLoginUser(email, clave);
 		log.info("Posible usuario adquirido");
 		
 		if(us != null) {
@@ -88,7 +86,8 @@ public class Login extends HttpServlet {
 			sesion.setAttribute("date", fecha);
 			request.getRequestDispatcher("menu.jsp").forward(request, response);
 		}else {
-			request.getRequestDispatcher("login.html").forward(request, response);
+			request.setAttribute("mensaje", "Error de autentificacion, comprueba tu correo o contraseña");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
 

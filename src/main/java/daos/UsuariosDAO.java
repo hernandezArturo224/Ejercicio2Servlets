@@ -4,19 +4,26 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import modelos.Usuarios;
+import utilidades.HibernateUtil;
 import utilidades.UsoLogger;
 
 import java.util.*;
 
 public class UsuariosDAO {
 	
-	public static Usuarios getLoginUser(Session s,String email, String clave) {
+	private static Session s;
+	
+	public static Usuarios getLoginUser(String email, String clave) {
+		s = HibernateUtil.getSessionFactory().openSession();
+		
 		 String hQuery = " from Usuarios u " +
                  " where u.email = :email";
 		 		Usuarios us = s.createQuery(hQuery, Usuarios.class)
                   .setParameter("email", email)
                   .setMaxResults(1)
                   .uniqueResult();
+		 		
+		 	s.close();	
  		if(us != null) {
  			if(us.getClave().equals(clave)) {
  				return us;
@@ -28,14 +35,17 @@ public class UsuariosDAO {
  		}	
 	}
 	
-	public static List<Usuarios> getAllUsers(Session s){
+	public static List<Usuarios> getAllUsers(){
+		s = HibernateUtil.getSessionFactory().openSession();
 		String hQuery = "from Usuarios";
 		List<Usuarios> users = s.createQuery(hQuery,Usuarios.class).list();
-		
+		s.close();
 		return users;
 	}
 	
-	public static boolean compruebaIdExistente(Session s,int id) {
+	public static boolean compruebaIdExistente(int id) {
+		s = HibernateUtil.getSessionFactory().openSession();
+		
 		 String hQuery = " from Usuarios u " +
                  " where u.id = :id";
 		 
@@ -44,6 +54,8 @@ public class UsuariosDAO {
 				 		.setMaxResults(1)
 		 				.uniqueResult();
 		 
+		 s.close();
+		 
 		 if(us != null) {
 			 return true;
 		 }else {
@@ -51,7 +63,9 @@ public class UsuariosDAO {
 		 }
 	}
 	
-	public static boolean compruebaEmailExistente(Session s,String email) {
+	public static boolean compruebaEmailExistente(String email) {
+		s = HibernateUtil.getSessionFactory().openSession();
+		
 		 String hQuery = " from Usuarios u " +
                 " where u.email = :email";
 		 
@@ -60,6 +74,8 @@ public class UsuariosDAO {
 				 		.setMaxResults(1)
 		 				.uniqueResult();
 		 
+		 s.close();
+		 
 		 if(us != null) {
 			 return true;
 		 }else {
@@ -68,10 +84,12 @@ public class UsuariosDAO {
 	}
 	
 	
-	public static void insertUser(Session s, int id,int id_rol,String email,String clave,String nombre,String ap1, String ap2,String direccion,String localidad,String provincia,String telefono,String dni ) {
+	public static void insertUser(int id,int id_rol,String email,String clave,String nombre,String ap1, String ap2,String direccion,String localidad,String provincia,String telefono,String dni ) {
+		s = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = s.beginTransaction();
 		Usuarios nuevo = new Usuarios(id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni);
 		s.save(nuevo);
 		tx.commit();
+		s.close();
 	}
 }

@@ -22,7 +22,6 @@ import utilidades.HibernateUtil;
 @WebServlet("/MuestraCategorias")
 public class MuestraCategorias extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Session s;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,10 +44,7 @@ public class MuestraCategorias extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		s = HibernateUtil.getSessionFactory().openSession();
-		List<Categorias> cat = CategoriasDAO.getAllCategorias(s);
-		s.close();
-		
+		List<Categorias> cat = CategoriasDAO.getAllCategorias();
 		request.setAttribute("listaCategorias", cat);
 		request.getRequestDispatcher("mostrarCategorias.jsp").forward(request, response);
 		

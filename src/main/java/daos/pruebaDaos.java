@@ -31,14 +31,29 @@ public class pruebaDaos {
 		//CategoriasDAO.insertCategoria(s, "Mandiles", "Mandiles wapisimos");
 		
 		//System.out.println(ProductosDAO.getAllProductos(s).get(0).toString());
-		GregorianCalendar cal = new GregorianCalendar(2024,10,20);
+		/*GregorianCalendar cal = new GregorianCalendar(2024,10,20);
 		Date date = new Date(cal.getTimeInMillis());
 		
 		
 		Timestamp fechaBaja = new Timestamp(date.getTime());
 		System.out.println(fechaBaja);
 		
-		ProductosDAO.insertProducto(s, 1, "Casio", "Casio", 15.0, 15, null, 15f);
+		ProductosDAO.insertProducto(s, 1, "Casio", "Casio", 15.0, 15, null, 15f);*/
+		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Introduce el e-mail\n");
+		String email = scan.next();
+		System.out.println("Introduce la clave\n");
+		String clave = scan.next();
+		
+		scan.close();
+		
+		Usuarios us = UsuariosDAO.getLoginUser(email, clave);
+		if(us != null) {
+			System.out.println("Bienvenido "+us.getNombre()+" "+us.getApellido1()+" "+us.getApellido2());
+		}else {
+			System.out.println("Error de usuario");
+		}
 	}
 
 }

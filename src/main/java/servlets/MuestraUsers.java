@@ -25,7 +25,6 @@ import utilidades.HibernateUtil;
 @WebServlet("/MuestraUsers")
 public class MuestraUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Session s;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,7 +39,7 @@ public class MuestraUsers extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		s = HibernateUtil.getSessionFactory().openSession();
+	
 	}
 
 	/**
@@ -49,15 +48,7 @@ public class MuestraUsers extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append("Mostrando usuarios");
-		List<Usuarios> us = UsuariosDAO.getAllUsers(s);
-		
-		/*PrintWriter writer = response.getWriter();
-		
-		Iterator<Usuarios> it = us.iterator();
-		
-		while(it.hasNext()) {
-			writer.println(it.next().toString());
-		}*/
+		List<Usuarios> us = UsuariosDAO.getAllUsers();
 		
 		request.setAttribute("listaUsers", us);
 		request.getRequestDispatcher("mostrarUsers.jsp").forward(request, response);

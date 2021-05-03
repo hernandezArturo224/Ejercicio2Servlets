@@ -19,7 +19,6 @@ import utilidades.HibernateUtil;
 @WebServlet("/InsertaCategoria")
 public class InsertaCategoria extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Session s;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -54,9 +53,7 @@ public class InsertaCategoria extends HttpServlet {
 		if(nombre.equals("")) {
 			request.getRequestDispatcher("insercionCategoria.jsp").forward(request, response);
 		}else {
-			s = HibernateUtil.getSessionFactory().openSession();
-			CategoriasDAO.insertCategoria(s, nombre, descripcion);
-			s.close();
+			CategoriasDAO.insertCategoria(nombre, descripcion);
 			request.getRequestDispatcher("menu.jsp").forward(request, response);
 		}
 		
