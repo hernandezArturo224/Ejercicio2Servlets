@@ -14,13 +14,13 @@ public class Usuarios implements Serializable{
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "id_rol", nullable = true)
+	@Column(name = "id_rol", nullable = false)
 	private int id_rol;
 	
-	@Column(name = "email", nullable = true)
+	@Column(name = "email", nullable = false)
 	private String email;
 	
-	@Column(name = "clave", nullable = true)
+	@Column(name = "clave", nullable = false)
 	private String clave;
 	
 	@Column(name = "nombre", nullable = true)
@@ -53,10 +53,9 @@ public class Usuarios implements Serializable{
 	
 	
 
-	public Usuarios(int id, int id_rol, String email, String clave, String nombre, String apellido1, String apellido2,
+	public Usuarios( int id_rol, String email, String clave, String nombre, String apellido1, String apellido2,
 			String direccion, String localidad, String provincia, String telefono, String dni) {
 		super();
-		this.id = id;
 		this.id_rol = id_rol;
 		this.email = email;
 		this.clave = clave;

@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.jasypt.util.password.StrongPasswordEncryptor;
+
 public class StringUtilities {
 	
 	public static Timestamp getTimestampFromString(String fecha) {
@@ -30,6 +32,23 @@ public class StringUtilities {
 		Date date = new Date();
 		Timestamp def = new Timestamp(date.getTime());
 		return def;
+	}
+	
+	public static String getEncryptedPassword(String pass) {
+		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+		String encryptedPassword = passwordEncryptor.encryptPassword(pass);
+		
+		return encryptedPassword;
+	}
+	
+	public static boolean checkPassword(String pass,String encryptedPass) {
+		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+		
+		if (passwordEncryptor.checkPassword(pass, encryptedPass)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

@@ -15,7 +15,7 @@
 	<%@ include file="cabecera.jsp" %>
 </div>
 <div class="div100">
-	<%@ include file="registro.html" %>
+	<%@ include file="registroForm.jsp" %>
 </div>
 </body>
 </html>

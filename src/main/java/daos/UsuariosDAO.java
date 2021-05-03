@@ -5,6 +5,7 @@ import org.hibernate.Transaction;
 
 import modelos.Usuarios;
 import utilidades.HibernateUtil;
+import utilidades.StringUtilities;
 import utilidades.UsoLogger;
 
 import java.util.*;
@@ -25,7 +26,7 @@ public class UsuariosDAO {
 		 		
 		 	s.close();	
  		if(us != null) {
- 			if(us.getClave().equals(clave)) {
+ 			if(StringUtilities.checkPassword(clave, us.getClave())) {
  				return us;
  			}else {
  				return null;
@@ -84,10 +85,10 @@ public class UsuariosDAO {
 	}
 	
 	
-	public static void insertUser(int id,int id_rol,String email,String clave,String nombre,String ap1, String ap2,String direccion,String localidad,String provincia,String telefono,String dni ) {
+	public static void insertUser(int id_rol,String email,String clave,String nombre,String ap1, String ap2,String direccion,String localidad,String provincia,String telefono,String dni ) {
 		s = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = s.beginTransaction();
-		Usuarios nuevo = new Usuarios(id,id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni);
+		Usuarios nuevo = new Usuarios(id_rol,email,clave,nombre,ap1,ap2,direccion,localidad,provincia,telefono,dni);
 		s.save(nuevo);
 		tx.commit();
 		s.close();

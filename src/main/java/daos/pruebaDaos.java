@@ -1,6 +1,7 @@
 package daos;
 
 import org.hibernate.Session;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import utilidades.HibernateUtil;
 import utilidades.Util;
@@ -56,9 +57,21 @@ public class pruebaDaos {
 			System.out.println("Error de usuario");
 		}*/
 		
-		Provincias[] prov = Util.getProvincias();
+		/*Provincias[] prov = Util.getProvincias();
 		for(Provincias provincia: prov) {
 			System.out.println(provincia.getNm());
+		}*/
+		
+		//ALTA
+		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+		String encryptedPassword = passwordEncryptor.encryptPassword("1234");
+		System.out.println("encriptado: " + encryptedPassword);
+		
+		//LOGIN
+		if (passwordEncryptor.checkPassword("1234", encryptedPassword)) {
+			System.out.println("Clave correcta"); // correct!
+		} else {
+			System.out.println("Clave incorrecta"); // bad login!
 		}
 	}
 
