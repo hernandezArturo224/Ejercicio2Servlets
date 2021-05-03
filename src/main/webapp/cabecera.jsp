@@ -39,7 +39,7 @@ String volver = (String)request.getParameter("volver");
 <div class="container">
 	<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
 	<ul class="nav nav-pills">
-      	<li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
+      	<li class="nav-item"><a href="menu.jsp" class="nav-link active">Home</a></li>
       	<li class="nav-item"><a href="http://localhost:8080/Ejercicio2Servlets/CerrarSesion" class="nav-link">Cerrar Sesion</a></li>
       	<%if(volver != null){ %>
       	<li class="nav-item"><a href="<%= volver %>" class="nav-link">Volver</a></li>
