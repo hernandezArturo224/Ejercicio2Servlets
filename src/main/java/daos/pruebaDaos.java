@@ -3,6 +3,7 @@ package daos;
 import org.hibernate.Session;
 
 import utilidades.HibernateUtil;
+import utilidades.Util;
 import modelos.*;
 
 import java.sql.Timestamp;
@@ -40,7 +41,7 @@ public class pruebaDaos {
 		
 		ProductosDAO.insertProducto(s, 1, "Casio", "Casio", 15.0, 15, null, 15f);*/
 		
-		Scanner scan = new Scanner(System.in);
+		/*Scanner scan = new Scanner(System.in);
 		System.out.println("Introduce el e-mail\n");
 		String email = scan.next();
 		System.out.println("Introduce la clave\n");
@@ -53,6 +54,11 @@ public class pruebaDaos {
 			System.out.println("Bienvenido "+us.getNombre()+" "+us.getApellido1()+" "+us.getApellido2());
 		}else {
 			System.out.println("Error de usuario");
+		}*/
+		
+		Provincias[] prov = Util.getProvincias();
+		for(Provincias provincia: prov) {
+			System.out.println(provincia.getNm());
 		}
 	}
 
