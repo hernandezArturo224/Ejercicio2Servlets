@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -8,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
 import controllers.RegistroController;
 import daos.UsuariosDAO;
+import modelos.Usuarios;
 import utilidades.StringUtilities;
 import utilidades.UsoLogger;
 
@@ -74,6 +77,15 @@ public class Registro extends HttpServlet {
 		log.info("Usuario registrado");
 		
 		if(correcto) {
+			HttpSession sesion = request.getSession(true);
+			Usuarios us = (Usuarios)sesion.getAttribute("user");
+			if(us == null) {
+				us = UsuariosDAO.getLoginUser(email, clave);
+				sesion.setAttribute("user", us);
+				Date fecha;
+				fecha = new Date();
+				sesion.setAttribute("date", fecha);
+			}
 			request.getRequestDispatcher("menu.jsp").forward(request, response);
 		}else {
 			request.getRequestDispatcher("registro.jsp").forward(request, response);

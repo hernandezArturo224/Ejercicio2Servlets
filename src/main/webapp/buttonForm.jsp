@@ -40,7 +40,10 @@ Usuarios use = (Usuarios)session.getAttribute("user");
 			<div  class="container-fluid">
 				 <div class="collapse navbar-collapse" id="navbarsExample09">
 				 	<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<%if(use.getId_rol()<=2){%>
+					<%
+					if(use != null){
+						if(use.getId_rol()<=2){
+					%>
 						<%if(use.getId_rol()<=1){%>
 							<li class="nav-item">
 								<a class="nav-link" href="registro.jsp?volver=menu.jsp" class="boton_personalizado">Registrarse</a>
@@ -70,7 +73,8 @@ Usuarios use = (Usuarios)session.getAttribute("user");
 							<a class="nav-link" href="http://localhost:8080/Ejercicio2Servlets/MuestraProductos?volver=menu.jsp" class="boton_personalizado">Ver Productos</a>
 						</li>
 					<%
-					}//fin if para ver algo
+						}//fin if para ver algo
+					}//Fin comprobar existencia del usuario	
 					%>
 					</ul>
 				</div>

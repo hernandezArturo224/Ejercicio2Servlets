@@ -57,6 +57,7 @@ if(mensaje==null){
     		</div>
 			<input type="submit" class="w-100 btn btn-lg btn-primary" name="btnSubmit" value="Entrar" />
 		</form>
+		<a href="registro.jsp" class="nav-link">Registrarse</a>
 	</main>	
 </body>
 </html>

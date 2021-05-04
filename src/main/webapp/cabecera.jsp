@@ -7,6 +7,10 @@
 Usuarios us = (Usuarios)session.getAttribute("user");
 Date fecha = (Date)session.getAttribute("date");
 String volver = (String)request.getParameter("volver");
+String home="menu.jsp";
+if(us == null){
+	home = "login.jsp";
+}
 %>  
 <!DOCTYPE html>
 <html>
@@ -39,15 +43,30 @@ String volver = (String)request.getParameter("volver");
 <div class="container">
 	<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
 	<ul class="nav nav-pills">
-      	<li class="nav-item"><a href="menu.jsp" class="nav-link active">Home</a></li>
+      	<li class="nav-item"><a href=<%= home %> class="nav-link active">Home</a></li>
+      	
+      	<%if(us != null){ %>
       	<li class="nav-item"><a href="http://localhost:8080/Ejercicio2Servlets/CerrarSesion" class="nav-link">Cerrar Sesion</a></li>
-      	<%if(volver != null){ %>
+      	<%
+      	}else{ %>
+      		<li class="nav-item"><a href="login.jsp" class="nav-link">Login</a></li>
+      	<% }
+      	if(volver != null){ %>
       	<li class="nav-item"><a href="<%= volver %>" class="nav-link">Volver</a></li>
       	<% 
-		}//fin if volver  
+		}//fin if volver 
+      	
+      	if(fecha != null){
 		%>
       	<li class="nav-item"><p class="nav-link"><% out.print(fecha); %></p></li>
+      	<% 
+      	}
+		if(us != null){
+      	%>
       	<li class="nav-item"><p class="nav-link"><% out.print(us.getNombre()+" "+us.getApellido1()+" "+us.getApellido2()); %></p></li>
+      	<%
+		}//fin if user
+      	%>
     </ul>
 	</header>
 </div>
