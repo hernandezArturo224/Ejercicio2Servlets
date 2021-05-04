@@ -61,6 +61,9 @@ public class Registro extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String idrstr = request.getParameter("id_rol");
+		if(idrstr == null) {
+			idrstr = "3";//por defecto se crean clientes
+		}
 		String email = request.getParameter("email");
 		String clave = request.getParameter("clave");
 		String nombre = request.getParameter("nombre");
@@ -86,7 +89,7 @@ public class Registro extends HttpServlet {
 				fecha = new Date();
 				sesion.setAttribute("date", fecha);
 			}
-			request.getRequestDispatcher("menu.jsp").forward(request, response);
+			request.getRequestDispatcher("BusquedaProductos").forward(request, response);
 		}else {
 			request.getRequestDispatcher("registro.jsp").forward(request, response);
 		}

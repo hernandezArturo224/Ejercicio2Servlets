@@ -1,7 +1,7 @@
 package utilidades;
 
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -16,6 +16,7 @@ public class Util {
 		String cadenaJson = leerUrl("https://raw.githubusercontent.com/IagoLast/pselect/master/data/provincias.json");
 
 		Provincias[] prov = new Gson().fromJson(cadenaJson, Provincias[].class);
+		Arrays.sort(prov);
 		
 		return prov;
 	}

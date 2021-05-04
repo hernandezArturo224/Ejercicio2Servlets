@@ -46,31 +46,31 @@ Usuarios use = (Usuarios)session.getAttribute("user");
 					%>
 						<%if(use.getId_rol()<=1){%>
 							<li class="nav-item">
-								<a class="nav-link" href="registro.jsp?volver=menu.jsp" class="boton_personalizado">Registrarse</a>
+								<a class="nav-link" href="http://localhost:8080/Ejercicio2Servlets/GetRolesRegistro">Registrarse</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="insercionRol.jsp?volver=menu.jsp" class="boton_personalizado">Agregar Rol</a>
+								<a class="nav-link" href="insercionRol.jsp" >Agregar Rol</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="insercionCategoria.jsp?volver=menu.jsp" class="boton_personalizado">Agregar Categoria</a>
+								<a class="nav-link" href="insercionCategoria.jsp" >Agregar Categoria</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="insercionProducto.jsp?volver=menu.jsp" class="boton_personalizado">Agregar Producto</a>
+								<a class="nav-link" href="insercionProducto.jsp" >Agregar Producto</a>
 							</li>
 						<%
 						}//fin if para ver los registros
 						%>
 						<li class="nav-item">
-							<a class="nav-link" href="http://localhost:8080/Ejercicio2Servlets/MuestraUsers?volver=menu.jsp" class="boton_personalizado">Ver usuarios</a>
+							<a class="nav-link" href="http://localhost:8080/Ejercicio2Servlets/MuestraUsers">Ver usuarios</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="http://localhost:8080/Ejercicio2Servlets/MuestraRoles?volver=menu.jsp" class="boton_personalizado">Ver roles</a>
+							<a class="nav-link" href="http://localhost:8080/Ejercicio2Servlets/MuestraRoles">Ver roles</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="http://localhost:8080/Ejercicio2Servlets/MuestraCategorias?volver=menu.jsp" class="boton_personalizado">Ver categorias</a>
+							<a class="nav-link" href="http://localhost:8080/Ejercicio2Servlets/MuestraCategorias" class="boton_personalizado">Ver categorias</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="http://localhost:8080/Ejercicio2Servlets/MuestraProductos?volver=menu.jsp" class="boton_personalizado">Ver Productos</a>
+							<a class="nav-link" href="http://localhost:8080/Ejercicio2Servlets/MuestraProductos" class="boton_personalizado">Ver Productos</a>
 						</li>
 					<%
 						}//fin if para ver algo

@@ -71,7 +71,7 @@ public class InsertaProducto extends HttpServlet {
 		
 		boolean correcto = ProductosController.insertProductoControl(id_cat, fecha, sto, imp, pre, descripcion, nombre);
 		if(correcto) {
-			request.getRequestDispatcher("menu.jsp").forward(request, response);
+			request.getRequestDispatcher("BusquedaProductos").forward(request, response);
 		}else {
 			request.getRequestDispatcher("insercionProducto.jsp").forward(request, response);
 		}

@@ -6,7 +6,8 @@
  
  <% 
  Provincias[] provincias = Util.getProvincias();
-
+ Usuarios usuarioConectado = (Usuarios)session.getAttribute("user");
+ List<Roles> roles = (List<Roles>)request.getAttribute("roles");
  %>   
 
 <!DOCTYPE html>
@@ -18,7 +19,24 @@
 <body>
 
 	<form method="post" style="text-align: center;" action="http://localhost:8080/Ejercicio2Servlets/Registro">
-		<input type="text"  style="margin: 5px;" name="id_rol" placeholder="Introduce la id_rol"/>
+		<%if(usuarioConectado != null){
+			if(usuarioConectado.getId_rol() == 1){
+			%>
+			<select name="id_rol">
+				<%
+				Iterator<Roles> it = roles.iterator();
+				while(it.hasNext()){
+					Roles rol = it.next();
+				%>
+				<option value=<%= rol.getId() %>><%=rol.getRol() %></option>
+				<% 
+				}//fin while
+				%>
+			</select>
+		<%
+			}//fin comprobar rol
+		}//fin comprobar si hay usuario
+		%>
 		</br>
 		<input type="text"  style="margin: 5px;" name="email" placeholder="Introduce el e-mail"/>
 		</br>

@@ -71,7 +71,7 @@ String idstr = request.getParameter("id");
 				String rol = request.getParameter("rol");
 				RolesDAO.insertRol(id, rol);
 				response.getWriter().append("Rol insertado");
-				request.getRequestDispatcher("menu.jsp").forward(request, response);
+				request.getRequestDispatcher("BusquedaProductos").forward(request, response);
 			}
 		}
 	}

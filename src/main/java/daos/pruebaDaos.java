@@ -57,13 +57,13 @@ public class pruebaDaos {
 			System.out.println("Error de usuario");
 		}*/
 		
-		/*Provincias[] prov = Util.getProvincias();
+		Provincias[] prov = Util.getProvincias();
 		for(Provincias provincia: prov) {
 			System.out.println(provincia.getNm());
-		}*/
+		}
 		
 		//ALTA
-		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+		/*StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
 		String encryptedPassword = passwordEncryptor.encryptPassword("1234");
 		System.out.println("encriptado: " + encryptedPassword);
 		
@@ -72,7 +72,7 @@ public class pruebaDaos {
 			System.out.println("Clave correcta"); // correct!
 		} else {
 			System.out.println("Clave incorrecta"); // bad login!
-		}
+		}*/
 	}
 
 }

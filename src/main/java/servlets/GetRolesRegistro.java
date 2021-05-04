@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,22 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
-
-import daos.CategoriasDAO;
-import utilidades.HibernateUtil;
+import daos.RolesDAO;
+import modelos.Roles;
 
 /**
- * Servlet implementation class InsertaCategoria
+ * Servlet implementation class GetRolesRegistro
  */
-@WebServlet("/InsertaCategoria")
-public class InsertaCategoria extends HttpServlet {
+@WebServlet("/GetRolesRegistro")
+public class GetRolesRegistro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertaCategoria() {
+    public GetRolesRegistro() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,7 +40,7 @@ public class InsertaCategoria extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+		doPost(request,response);
 	}
 
 	/**
@@ -48,15 +48,10 @@ public class InsertaCategoria extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String nombre = request.getParameter("name");
-		String descripcion = request.getParameter("desc");
-		if(nombre.equals("")) {
-			request.getRequestDispatcher("insercionCategoria.jsp").forward(request, response);
-		}else {
-			CategoriasDAO.insertCategoria(nombre, descripcion);
-			request.getRequestDispatcher("BusquedaProductos").forward(request, response);
-		}
+		List<Roles> roles = RolesDAO.getAllRoles();
 		
+		request.setAttribute("roles", roles);
+		request.getRequestDispatcher("registro.jsp").forward(request, response);
 	}
 
 }
