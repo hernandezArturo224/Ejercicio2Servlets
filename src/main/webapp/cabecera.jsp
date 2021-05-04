@@ -39,16 +39,14 @@ String home="BusquedaProductos";
 <body>
 <div class="container">
 	<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-	<ul class="nav nav-pills" style="width: 90%;">
+	<ul class="nav nav-pills">
       	<li class="nav-item"><a href=<%= home %> class="nav-link active">Home</a></li>
       	
       	<%if(us != null){ %>
       	<li class="nav-item"><a href="http://localhost:8080/Ejercicio2Servlets/CerrarSesion" class="nav-link">Cerrar Sesion</a></li>
       	<%
       	}else{ %>
-      		<div style="width: 80%; text-align: right; ">
-      			<li class="nav-item" style="text-align: right;"><a href="login.jsp" class="nav-link active" style="width: 20%">Login</a></li>
-      		</div>
+      			<li class="nav-item" ><a href="login.jsp" class="nav-link">Login</a></li>
       	<% }
       	if(volver != null){ %>
       	<li class="nav-item"><a href="<%= volver %>" class="nav-link">Volver</a></li>
