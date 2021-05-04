@@ -84,7 +84,7 @@ public class Login extends HttpServlet {
 			Date fecha;
 			fecha = new Date();
 			sesion.setAttribute("date", fecha);
-			request.getRequestDispatcher("menu.jsp").forward(request, response);
+			request.getRequestDispatcher("BusquedaProductos").forward(request, response);
 		}else {
 			request.setAttribute("mensaje", "Error de autentificacion, comprueba tu correo o contraseña");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
